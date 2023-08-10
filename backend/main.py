@@ -51,7 +51,7 @@ class MonitoringParser(BaseOutputParser):
 async def assistant(request: Request):
     raw_body = await request.json()
 
-    raw_result = collection.find()
+    raw_result = collection.find({}, {"embedding": 0})
     result = list(raw_result)
     system_message = SystemMessage(content=str(result))
     question_template = HumanMessagePromptTemplate.from_template(
